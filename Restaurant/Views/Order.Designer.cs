@@ -63,7 +63,7 @@ namespace Restaurant
             btnCreate.TabIndex = 2;
             btnCreate.Text = "Create";
             btnCreate.UseVisualStyleBackColor = true;
-            btnCreate.Click += btnCreate_Click;
+            btnCreate.Click += CreateButton_Click;
             // 
             // lblDish
             // 

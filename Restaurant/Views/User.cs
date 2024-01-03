@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using RestaurantDB.Service;
 using System;
 using System.Windows.Forms;
 
@@ -6,34 +7,33 @@ namespace Restaurant
 {
     public partial class NewUser : Form
     {
-        MySqlConnection Connection { get; set; }
+        private readonly MySqlConnection connection = ConnectionHelper.Connection;
 
-        public NewUser(MySqlConnection Connection)
+        public NewUser()
         {
             InitializeComponent();
-            this.Connection = Connection;
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void AddUserButton_Click(object sender, EventArgs e)
         {
             try
             {
                 if (txtLogin.Text != "" && txtPassword.Text != "")
                 {
                     string Query = "INSERT INTO restaurant.users (Login, Password, UserId) VALUES ('" + txtLogin.Text + "', '" + txtPassword.Text + "',2);";
-                    Connection.Open();
+                    connection.Open();
 
-                    MySqlCommand Command = new(Query, Connection);
+                    MySqlCommand Command = new(Query, connection);
                     Command.ExecuteNonQuery();
-                    Connection.Close();
+                    connection.Close();
 
-                    MessageBox.Show("Кліент успішно створений!");
+                    MessageBox.Show("Client created successfuly!");
                     return;
                 }
             }
             catch
             {
-               MessageBox.Show("Неправильно заповнено дані!");
+               MessageBox.Show("Entered data is invalid.");
             }
         }
     }

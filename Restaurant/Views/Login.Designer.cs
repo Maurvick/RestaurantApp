@@ -45,7 +45,7 @@ namespace Restaurant
             btnEnter.TabIndex = 0;
             btnEnter.Text = "Enter";
             btnEnter.UseVisualStyleBackColor = true;
-            btnEnter.Click += btnEnter_Click;
+            btnEnter.Click += EnterButton_Click;
             // 
             // txtLogin
             // 

@@ -1,6 +1,7 @@
 ﻿using System;
 using MySql.Data.MySqlClient;
 using System.Windows.Forms;
+using RestaurantDB.Service;
 
 namespace Restaurant
 {
@@ -11,21 +12,25 @@ namespace Restaurant
             InitializeComponent();
         }
 
-        private void btnEnter_Click(object sender, EventArgs e)
+        private void EnterButton_Click(object sender, EventArgs e)
         {
             string user = txtLogin.Text;
             string password = txtPassword.Text;
 
-            MySqlConnection con = new($"Database='';Datasource=localhost;User={user};Password={password}");
-            Menu menu = new(con);
+            // Configure connection
+            MySqlConnection connection = new($"Database='';Datasource=localhost;User={user};Password={password}");
+
+            // Set connection as accessible property
+            ConnectionHelper.Connection = connection;
 
             try
             {
-                con.Open();
-               
-                Hide();
+                Options menu = new();
 
-                con.Close();
+                // Close connection to enable operations with db
+                connection.Close();
+
+                Hide();
 
                 menu.ShowDialog();
 

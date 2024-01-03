@@ -1,7 +1,7 @@
 ﻿
 namespace Restaurant
 {
-    partial class btnDishes
+    partial class Display
     {
         /// <summary>
         /// Required designer variable.
@@ -44,14 +44,14 @@ namespace Restaurant
             dgDishes.Size = new System.Drawing.Size(782, 404);
             dgDishes.TabIndex = 0;
             // 
-            // btnDishes
+            // Display
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(782, 403);
             Controls.Add(dgDishes);
-            Name = "btnDishes";
-            Text = "Dishes";
+            Name = "Display";
+            Text = "Display";
             ((System.ComponentModel.ISupportInitialize)dgDishes).EndInit();
             ResumeLayout(false);
         }

@@ -3,25 +3,26 @@ using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 using System.Windows.Forms;
 using RestaurantDB.Models;
+using RestaurantDB.Service;
 
 namespace Restaurant
 {
-    public partial class Menu : Form
+    public partial class Options : Form
     {
-        MySqlConnection Connection { get; set; }
+        private readonly MySqlConnection connection = ConnectionHelper.Connection;
 
-        public Menu(MySqlConnection Connection)
+        public Options() 
         {
             InitializeComponent();
-            this.Connection = Connection;
+            ConnectionHelper.EnsureDbCreated();
         }
 
-        private void btnDishes_Click(object sender, EventArgs e)
+        private void DishesButton_Click(object sender, EventArgs e)
         {
             string Query = "SELECT Food, Class, Kitchen, Composition, Price FROM restaurant.dishes";
-            Connection.Open();
+            connection.Open();
 
-            MySqlCommand Command = new(Query, Connection);
+            MySqlCommand Command = new(Query, connection);
             List<Dishes> list = [];
             MySqlDataReader Reader = Command.ExecuteReader();
 
@@ -38,17 +39,17 @@ namespace Restaurant
                 });
             }
 
-            btnDishes form3 = new(list);
-            form3.ShowDialog();
-            Connection.Close();
+            Display d = new(list);
+            d.ShowDialog();
+            connection.Close();
         }
 
-        private void btnMenu_Click(object sender, EventArgs e)
+        private void MenuButton_Click(object sender, EventArgs e)
         {
             string Query = "SELECT Food, Class, Composition, Price FROM restaurant.dishes";
-            Connection.Open();
+            connection.Open();
 
-            MySqlCommand Command = new(Query, Connection);
+            MySqlCommand Command = new(Query, connection);
             List<RestaurantDB.Models.Menu> list = [];
             MySqlDataReader Reader = Command.ExecuteReader();
             
@@ -64,17 +65,17 @@ namespace Restaurant
                 });
             }
 
-            btnDishes form3 = new(list);
-            form3.ShowDialog();
-            Connection.Close();
+            Display d = new(list);
+            d.ShowDialog();
+            connection.Close();
         }
 
-        private void btnJournal_Click(object sender, EventArgs e)
+        private void JournalButton_Click(object sender, EventArgs e)
         {
             string Query = "SELECT Login, Password, ut.UserName from restaurant.users u, restaurant.usertypes ut where u.UserId = ut.Id and ut.Id != 0";
-            Connection.Open();
+            connection.Open();
 
-            MySqlCommand Command = new(Query, Connection);
+            MySqlCommand Command = new(Query, connection);
             List<Users> list = [];
             MySqlDataReader Reader = Command.ExecuteReader();
             
@@ -89,18 +90,17 @@ namespace Restaurant
                 });
             }
 
-            btnDishes form3 = new(list);
-            form3.ShowDialog();
-            Connection.Close();
+            Display d = new(list);
+            d.ShowDialog();
+            connection.Close();
         }
 
-        // Orders
-        private void btnOrders_Click(object sender, EventArgs e)
+        private void OrdersButton_Click(object sender, EventArgs e)
         {
             string Query = "SELECT OrderId, ut.DishName, `Status` FROM restaurant.orders u, restaurant.dishnames ut where u.Dish = ut.Id";
-            Connection.Open();
+            connection.Open();
 
-            MySqlCommand Command = new(Query, Connection);
+            MySqlCommand Command = new(Query, connection);
             List<Orders> list = [];
             MySqlDataReader Reader = Command.ExecuteReader();
 
@@ -115,32 +115,29 @@ namespace Restaurant
                 });
             }
 
-            btnDishes form3 = new(list);
-            form3.ShowDialog();
-            Connection.Close();
+            Display d = new(list);
+            d.ShowDialog();
+            connection.Close();
         }
 
-        // Add Users
-        private void btnCreateClient_Click(object sender, EventArgs e)
+        private void CreateClientButton_Click(object sender, EventArgs e)
         {
-            NewUser form4 = new(Connection);
+            NewUser form4 = new();
             form4.ShowDialog();
         }
 
-        // Add Orders
-        private void btnMakeOrder_Click(object sender, EventArgs e)
+        private void MakeOrderButton_Click(object sender, EventArgs e)
         {
-            Order form5 = new(Connection);
+            Order form5 = new();
             form5.ShowDialog();
         }
 
-        // Party
-        private void btnBanquet_Click(object sender, EventArgs e)
+        private void BanquetButton_Click(object sender, EventArgs e)
         {
             string Query = "SELECT ut.OrderName, Dish, `Status` FROM restaurant.orders u, restaurant.ordertypes ut where u.OrderId = ut.Id;";
-            Connection.Open();
+            connection.Open();
 
-            MySqlCommand Command = new(Query, Connection);
+            MySqlCommand Command = new(Query, connection);
             List<Orders> list = [];
             MySqlDataReader Reader = Command.ExecuteReader();
 
@@ -155,9 +152,9 @@ namespace Restaurant
                 });
             }
 
-            btnDishes form3 = new(list);
-            form3.ShowDialog();
-            Connection.Close();
+            Display d = new(list);
+            d.ShowDialog();
+            connection.Close();
         }
     }
 }

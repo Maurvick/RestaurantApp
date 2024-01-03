@@ -10,4 +10,10 @@
     <PackageReference Include="MySql.Data" Version="8.0.29" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="restaurant.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

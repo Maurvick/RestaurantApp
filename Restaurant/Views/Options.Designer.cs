@@ -1,7 +1,7 @@
 ﻿
 namespace Restaurant
 {
-    partial class Menu
+    partial class Options
     {
         /// <summary>
         /// Required designer variable.
@@ -49,7 +49,7 @@ namespace Restaurant
             btnDishes.TabIndex = 0;
             btnDishes.Text = "Dishes";
             btnDishes.UseVisualStyleBackColor = true;
-            btnDishes.Click += btnDishes_Click;
+            btnDishes.Click += DishesButton_Click;
             // 
             // btnMenu
             // 
@@ -60,7 +60,7 @@ namespace Restaurant
             btnMenu.TabIndex = 1;
             btnMenu.Text = "Menu";
             btnMenu.UseVisualStyleBackColor = true;
-            btnMenu.Click += btnMenu_Click;
+            btnMenu.Click += MenuButton_Click;
             // 
             // btnJournal
             // 
@@ -71,7 +71,7 @@ namespace Restaurant
             btnJournal.TabIndex = 2;
             btnJournal.Text = "Journal";
             btnJournal.UseVisualStyleBackColor = true;
-            btnJournal.Click += btnJournal_Click;
+            btnJournal.Click += JournalButton_Click;
             // 
             // btnOrders
             // 
@@ -82,7 +82,7 @@ namespace Restaurant
             btnOrders.TabIndex = 3;
             btnOrders.Text = "Orders";
             btnOrders.UseVisualStyleBackColor = true;
-            btnOrders.Click += btnOrders_Click;
+            btnOrders.Click += OrdersButton_Click;
             // 
             // lblMainFunctions
             // 
@@ -113,7 +113,7 @@ namespace Restaurant
             btnCreateClient.TabIndex = 6;
             btnCreateClient.Text = "Create client";
             btnCreateClient.UseVisualStyleBackColor = true;
-            btnCreateClient.Click += btnCreateClient_Click;
+            btnCreateClient.Click += CreateClientButton_Click;
             // 
             // btnMakeOrder
             // 
@@ -124,7 +124,7 @@ namespace Restaurant
             btnMakeOrder.TabIndex = 7;
             btnMakeOrder.Text = "Make order";
             btnMakeOrder.UseVisualStyleBackColor = true;
-            btnMakeOrder.Click += btnMakeOrder_Click;
+            btnMakeOrder.Click += MakeOrderButton_Click;
             // 
             // btnBanquet
             // 
@@ -135,9 +135,9 @@ namespace Restaurant
             btnBanquet.TabIndex = 8;
             btnBanquet.Text = "Banquet";
             btnBanquet.UseVisualStyleBackColor = true;
-            btnBanquet.Click += btnBanquet_Click;
+            btnBanquet.Click += BanquetButton_Click;
             // 
-            // Menu
+            // Options
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -153,8 +153,8 @@ namespace Restaurant
             Controls.Add(btnDishes);
             Font = new System.Drawing.Font("Segoe UI", 12F);
             Margin = new System.Windows.Forms.Padding(4);
-            Name = "Menu";
-            Text = "Menu";
+            Name = "Options";
+            Text = "Options";
             ResumeLayout(false);
             PerformLayout();
         }

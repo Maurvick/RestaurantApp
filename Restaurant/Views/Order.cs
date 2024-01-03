@@ -1,17 +1,17 @@
 ﻿using System;
 using MySql.Data.MySqlClient;
 using System.Windows.Forms;
+using RestaurantDB.Service;
 
 namespace Restaurant
 {
     public partial class Order : Form
     {
-        MySqlConnection Connection { get; set; }
+        private readonly MySqlConnection connection = ConnectionHelper.Connection;
 
-        public Order(MySqlConnection Connection)
+        public Order()
         { 
             InitializeComponent();
-            this.Connection = Connection;
             SetComboBox1();
             SetComboBox2();
         }
@@ -20,9 +20,9 @@ namespace Restaurant
         {
             
             string Query = "SELECT Food from restaurant.dishes";
-            Connection.Open();
+            connection.Open();
 
-            MySqlCommand Command = new(Query, Connection);
+            MySqlCommand Command = new(Query, connection);
             MySqlDataReader Reader = Command.ExecuteReader();
 
             while (Reader.Read())
@@ -30,16 +30,16 @@ namespace Restaurant
                 cmbDishes.Items.Add(Reader.GetValue(0).ToString());
             }
 
-            Connection.Close();
+            connection.Close();
 
         }
 
         private void SetComboBox2()
         {
             string Query = "SELECT OrderName From restaurant.ordertypes";
-            Connection.Open();
+            connection.Open();
 
-            MySqlCommand Command = new(Query, Connection);
+            MySqlCommand Command = new(Query, connection);
             MySqlDataReader Reader = Command.ExecuteReader();
 
             while (Reader.Read())
@@ -47,11 +47,11 @@ namespace Restaurant
                 cmbType.Items.Add(Reader.GetValue(0).ToString());
             }
 
-            Connection.Close();
+            connection.Close();
 
         }
 
-        private void btnCreate_Click(object sender, EventArgs e)
+        private void CreateButton_Click(object sender, EventArgs e)
         {
             try
             {
@@ -59,19 +59,19 @@ namespace Restaurant
                 {   
                                                                                                   
                     string Query = "INSERT INTO restaurant.orders (OrderId, Dish, Status) VALUES (" + (cmbDishes.SelectedIndex + 1) + ", '" + (cmbType.SelectedIndex + 1) + "', 'Виконується');";
-                    Connection.Open();
+                    connection.Open();
 
-                    MySqlCommand Command = new(Query, Connection);
+                    MySqlCommand Command = new(Query, connection);
                     Command.ExecuteNonQuery();
-                    Connection.Close();
+                    connection.Close();
 
-                    MessageBox.Show("Замовлення створено!");
+                    MessageBox.Show("Order created successfuly!");
                     return;
                 }
             }
             catch
             {
-                MessageBox.Show("Заповніть дані правильно!");
+                MessageBox.Show("Entered data is invalid.");
             }
         }
     }

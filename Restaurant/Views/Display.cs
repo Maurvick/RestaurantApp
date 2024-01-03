@@ -2,9 +2,9 @@
 
 namespace Restaurant
 {
-    public partial class btnDishes : Form
+    public partial class Display : Form
     {
-        public btnDishes(object Source)
+        public Display(object Source)
         {
             InitializeComponent();
             dgDishes.DataSource = Source;
